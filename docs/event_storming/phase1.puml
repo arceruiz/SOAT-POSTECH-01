@@ -1,0 +1,8 @@
+@startuml
+object "customer was registered" as r1
+object "vehicle was edited" as r2
+object "sale vehicles were listed" as r3
+object "customer bought a vehicle" as r4
+object "sale was registered" as r5
+object "sold vehicles were listed" as r6
+@enduml

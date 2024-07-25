@@ -1,15 +1,22 @@
 package ports
 
-import "github.com/arceruiz/SOAT-POSTECH-01/internal/core/domain"
+import (
+	"SOAT-POSTECH-01/internal/core/domain"
+	"context"
 
+	"github.com/labstack/echo/v4"
+)
+
+type SaleHandler interface {
+	SearchSales(echo.Context) error
+	CreateSale(echo.Context) error
+}
 type SaleService interface {
-	CreateSale(sale domain.Sale) error
-	GetSale(id string) (domain.Sale, error)
-	GetAllSales() ([]domain.Sale, error)
+	SearchSales(ctx context.Context) ([]domain.Sale, error)
+	CreateSale(ctx context.Context, sale domain.Sale) error
 }
 
 type SaleRepository interface {
-	CreateSale(sale domain.Sale) error
-	GetSale(id string) (domain.Sale, error)
-	GetAllSales() ([]domain.Sale, error)
+	SearchSales(ctx context.Context) ([]domain.Sale, error)
+	CreateSale(ctx context.Context, sale domain.Sale) error
 }

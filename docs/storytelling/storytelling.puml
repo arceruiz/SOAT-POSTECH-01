@@ -1,0 +1,81 @@
+@startuml storytelling
+skinparam actorStyle awesome
+skinparam rectangle{
+  ArrowColor #FF6655
+}
+package "Pure Domain" as r7{
+ rectangle "1 Vehicle Registration"{
+  actor Operator1 as op1
+  rectangle Email as email
+  op1 -> email : **1:** Sale vehicle data
+  actor Operator2 as op2
+  email -> op2 : to
+  node Vehicle as vehicle
+  op2 -> vehicle : **2:** Register
+ }
+ rectangle "2 Vehicle Sale"{
+  component "Sale Vehicles" as salevehicles
+  note right of salevehicles : List containing available vehicles
+  vehicle -down-> salevehicles : on
+  actor Seller as seller
+  seller -up-> salevehicles : **1:** List avaliable vehicles
+  node Vehicle as vehicle2
+  seller -right-> vehicle2 : **2:** Shows avaliable vehicles
+  actor Customer as customer
+  customer -up-> vehicle2 : **3:** Choose a vehicle
+  node Documents as docs
+  customer -> docs : **4:** Deliever
+  docs -> seller : to
+  node Sale as sale
+  note left of sale: Document containing sale, customer and vehiche information
+  seller -left-> sale : **5:** Create sale
+ }
+}
+rectangle "Digitalized Domain" as r8{
+ rectangle "1. Vehicle Registration" as r1{
+  actor Operator as op
+  node Vehicle as vehicle3
+  op -> vehicle3 : **1:** Register
+  node System as sys
+  vehicle3 -> sys : on
+ }
+ rectangle "1.1. Client Registration" as r2{
+  actor Customer as customer2
+  node Customer as customer3
+  customer2 -> customer3: **1:** Register
+  node System as sys1
+  customer3 -> sys1 : on
+ }
+ rectangle "2. Vehicle Sale" as r3{
+  rectangle " " as r4{
+  actor Customer as cust1
+  node Vehicle as vh1
+  node System as sy1
+   cust1 -> vh1 : List
+   vh1 -> sy1: on
+  }
+  rectangle " " as r5{
+  actor Customer as cust2
+  node Vehicle as vh2
+  node System as sy2
+   cust2 -> vh2 : Choose
+   vh2 -> sy2: on
+  }
+  rectangle " " as r6{
+  actor Customer as cust3
+  node Vehicle as vh3
+  node System as sy3
+  node Sale as sale2
+   cust3 -> vh3 : Buys
+   vh3 -> sy3: on
+   sy3 -> sale2 : Creates
+  }
+ }
+}
+
+r1 -down[#white]-> r2
+r2 -down[#white]-> r3
+r4 -down[#white]-> r5
+r5 -down[#white]-> r6
+
+@enduml

@@ -1,0 +1,3 @@
+db:
+  connection_string: host=localhost port=5432 dbname=prd_db user=postgres password=1234 sslmode=disable
+  #connection_string: host=fiap_postech_db port=5432 dbname=prd_db user=postgres password=1234 sslmode=disable

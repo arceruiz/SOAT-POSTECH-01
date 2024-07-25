@@ -1,0 +1,18 @@
+version: '3'
+services:
+  postgres:
+    container_name: fiap_postech_db
+    image: soat_postech_database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "prd_db"
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_USER: "postgres"
+  api:
+    depends_on:
+    - postgres
+    container_name: fiap_postech_app
+    image: soat_postech_app
+    ports:
+      - "8081:8081"

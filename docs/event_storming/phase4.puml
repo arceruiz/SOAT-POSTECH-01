@@ -1,0 +1,90 @@
+@startuml
+left to right direction
+
+
+card Customer as cu2  <<AT>>
+card "Register User" as cmd0  <<CMD>> #lightblue
+node "Customer" as node1 <<AG>> {
+  portin " " as p0
+  portout " " as po0
+}
+card "Customer was registered" as ev  <<EV>> #yellow
+
+cu2 --> cmd0
+cmd0 --> p0
+po0 --> ev
+
+
+card Operator as op1  <<AT>>
+card Customer as cu1  <<AT>>
+card Operator as op2  <<AT>>
+
+card "Register vehicle" as cmd1 <<CMD>> #lightblue
+card "List Vehicles for sale" as cmd2 <<CMD>> #lightblue
+card "Register Sale" as cmd3 <<CMD>> #lightblue
+card "Update Status" as cmd4 <<CMD>> #lightblue
+card "List sold vehicles" as cmd5 <<CMD>> #lightblue
+
+card "List sale vehicles" as ml0 <<ML>> #lightgreen
+
+card "Vehicle was registered" as ev0 <<EV>>#yellow
+card "Sale vehicles were listed" as ev1 <<EV>>#yellow
+card "Customer bought vehicle" as ev2 <<EV>>#yellow
+card "Vehicle was edited" as ev3 <<EV>>#yellow
+card "Sold vehicles were listed" as ev4 <<EV>>#yellow
+
+card "Generate Sale" as pol0  <<POL>> #pink
+node "VEHICLE" as node2 <<AG>> {
+  portin " " as p1
+  portin " " as p2
+  portin " " as p3
+  portin " " as p4
+  portin " " as p5
+  portin " " as p6
+  portin " " as p7
+  portout " " as po1
+  portout " " as po2
+  portout " " as po4
+  portout " " as po3
+  portout " " as po5
+  portout " " as po6
+  portout " " as po7
+}
+
+op1 --> cmd1 #white
+cmd1 --> p7
+po7 --> ev0
+cu1 --> cmd2 #white
+cmd2 --> p6
+po6 --> ev1
+ev1 -up-> po5
+ml0 --> cmd3 #white
+
+cmd3 <-- p5
+cmd3 --> p4
+
+po4 --> ev2
+ev2 --> pol0
+
+card "Register sale" as cmd6  <<CMD>> #lightblue
+node "Sale" as node3 <<AG>> {
+  portin " " as p10
+  portout " " as po10
+}
+card "Sale was registered" as ev10  <<EV>> #yellow
+card "Update vehicle state" as pol10  <<POL>> #pink
+cmd6 --> p10
+po10 --> ev10
+ev10 --> pol10
+
+pol0 ---> cmd6
+pol10 ---up---> po3
+
+
+cmd4 <-- p3
+cmd4 --> p2
+po2 --> ev3
+po1 --> ev4
+op2 --> cmd5 #white
+cmd5 --> p1
+@enduml

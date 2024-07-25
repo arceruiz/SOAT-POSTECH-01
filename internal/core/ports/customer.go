@@ -1,13 +1,20 @@
 package ports
 
-import "github.com/arceruiz/SOAT-POSTECH-01/internal/core/domain"
+import (
+	"SOAT-POSTECH-01/internal/core/domain"
+	"context"
+
+	"github.com/labstack/echo/v4"
+)
+
+type CustomerHandler interface {
+	RegisterCustomer(echo.Context) error
+}
 
 type CustomerService interface {
-	CreateCustomer(customer domain.Customer) error
-	GetCustomer(id string) (domain.Customer, error)
+	RegisterCustomer(ctx context.Context, customer domain.Customer) (string, error)
 }
 
 type CustomerRepository interface {
-	CreateCustomer(customer domain.Customer) error
-	GetCustomer(id string) (domain.Customer, error)
+	RegisterCustomer(ctx context.Context, customer domain.Customer) error
 }

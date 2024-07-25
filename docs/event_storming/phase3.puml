@@ -1,0 +1,25 @@
+@startuml
+
+title Delimited Context
+
+package "1. Register" as p1 {
+ object "vehicle was registered" as r1
+ object "customer was registered" as r2
+}
+package "2. Sale" as p2 {
+ object "sale vehicles were listed" as r3
+ object "customer bought a vehicle" as r4
+ object "sale was registered" as r5
+ object "vehicle was edited" as r6
+}
+package "3. Audit" as p3 {
+ object "sold vehicles were listed" as r7
+}
+r1 -> r2
+r2 -> r3
+r3 -> r4
+r4 -> r5
+r5 -> r6
+r6 -> r7
+
+@enduml

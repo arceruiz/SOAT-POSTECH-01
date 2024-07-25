@@ -1,0 +1,8 @@
+#soat_postech_database
+FROM postgres:latest
+
+ENV POSTGRES_DB="prd_db"
+ENV POSTGRES_PASSWORD="1234"
+ENV POSTGRES_USER="postgres"
+
+COPY ./build/schema.sql ./docker-entrypoint-initdb.d/
